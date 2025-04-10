@@ -1,0 +1,35 @@
+@startuml
+
+
+entity "SmartModule" {
+  + Id : int <<PK>>
+  + Name : string
+  + Type : string
+  + Description: string
+  + Status: JSON
+}
+
+entity "User" {
+  + Id : int <<PK>>
+  + Name : string
+  + HomeId : int <<FK>> -- References Home.CustomerId
+}
+
+entity "Home" {
+  + Id : int <<PK>>
+  + Date : DateTime
+  + OwnerId : int <<FK>> -- References User.Id
+}
+
+entity "HomeModule" {
+  + Id : int <<PK>>
+  + HomeId : int <<FK>> -- References Home.Id
+  + SmartModuleId : int <<FK>> -- References SmartModule.Id
+}
+
+
+User ||--o{ Home : "houses"
+Home ||--o{ HomeModule : "contains"
+SmartModule ||--o{ HomeModule : "includes"
+
+@enduml

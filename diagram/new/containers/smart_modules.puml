@@ -1,0 +1,13 @@
+@startuml
+title Context Diagram of Smart Modules
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+System(SmartController, "Smart Controller", "Manage of Smart modules")
+
+System(SmartModules, "Smart Modules", "Smart modules in the house")
+
+Rel(SmartController, SmartModules, "Control")
+Rel(SmartModules, SmartController, "Fetch status")
+
+@enduml

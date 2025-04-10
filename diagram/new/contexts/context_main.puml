@@ -1,0 +1,18 @@
+@startuml
+title Context Diagram of Smart Control Home
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+Person(user, "User", "A user of the Smart Home system")
+
+System(SmartHomeControl, "Smart Control Home", "Web site smart control of the house")
+
+System(SmartHomeBackend, "Smart Home Backend", "Backend for control of the house")
+
+System_Ext(SmartModules, "Smart modules", "External API of smart modules")
+
+Rel(user, SmartHomeControl, "Uses the system")
+Rel(SmartHomeControl, SmartHomeBackend, "Communication")
+Rel(SmartHomeBackend, SmartModules, "Fetche data and control of smart modules")
+
+@enduml

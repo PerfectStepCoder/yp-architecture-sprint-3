@@ -1,0 +1,15 @@
+@startuml
+title Container Backend of Smart Control Home
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+System(GatewayAPI, "API Gateway", "")
+
+System(Commands, "Commands", "Kafka")
+System(SmartModules, "Smart Modules", "Microservers")
+
+Rel(GatewayAPI, Commands, "Send commands")
+Rel(GatewayAPI, SmartModules, "Add/Remove/GetStatus")
+Rel(SmartModules, Commands, "Recieve commands")
+
+@enduml

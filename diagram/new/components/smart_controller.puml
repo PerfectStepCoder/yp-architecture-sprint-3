@@ -1,0 +1,28 @@
+@startuml
+title Container Diagram of Smart Controller
+
+top to bottom direction
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+Container_Boundary(SmartControllerSystem, "Smart Controller of Smart Modules in the house") {
+  Container(SmartController, "Web Application", "React, TS", "Control Panel for add new Smart Modules")
+  Container(Database, "Database", "PostgreSQL", "Stores Smart Modules data")
+  Container(SmartModules, "Smart Modules", "Phisical", "Smart Modules in the house")
+}
+
+System_Ext(SmartModulesServices, "Smart Modules Services", "Microservers")
+
+Container(SmartController, "Web Application", "Go, React") {
+  Component(WebApp, "Web Application", "React, TS", "Control Panel for add new Smart Modules")
+  Component(SmartControllerAPI, "API Smart Controller", "Go, gRPC", "Handles user interactions")
+}
+
+Rel(SmartModulesServices, SmartModules, "Control")
+
+Rel(SmartControllerAPI, SmartModules,"Control")
+Rel(WebApp, Database, "CRUD Smart Modules")
+Rel(WebApp, SmartModules, "Register new Smart Modules")
+Rel(SmartControllerAPI, Database, "Get meta about Smart Modules")
+
+@enduml
