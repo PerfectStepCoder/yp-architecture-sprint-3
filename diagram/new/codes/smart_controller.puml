@@ -1,0 +1,28 @@
+@startuml
+
+title Smart Controller Code Diagram
+
+top to bottom direction
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+class SmartService {
+  +UUID uid
+  +String name
+  +void sendCommand(uid smartModuleId)
+  +void fetchStatus(uid smartModuleId)
+}
+
+class SmartModule {
+  +UUID uid
+  +String type
+  +Date startDate
+  +Date endDate
+  +JSON status
+  +void activate()
+  +void stop()
+}
+
+SmartService "1" -- "0..*" SmartModule : sendCommand / fetchStatus
+
+@enduml
